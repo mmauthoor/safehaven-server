@@ -2,10 +2,12 @@ const express = require('express')
 const app = express()
 const cors = require('cors');
 app.use(cors())
+const db = require("./db")
 
 // using environment variables
 const PORT = process.env.PORT || 8000
-const Report = require('./models/report.js')
+const Report = require('./models/report.js');
+const { reports } = require('./models/report.js');
 
 
 
@@ -13,6 +15,8 @@ const Report = require('./models/report.js')
 // mainly for client side js that runs in the browser
 // bascially how project 1 works
 app.use(express.static('public'))
+
+app.use(express.json())
 
 app.get('/api/reports', (req, res) => {
   Report.reports()
@@ -25,15 +29,23 @@ app.get('/api/info', (req, res) => {
   res.json({ message: 'welcome to the safehaven json api'})
 })
 
-app.listen(PORT, () => {
-  console.log(`server listening on port ${PORT}`);
-})
-
 app.get('/api/stations/stats', (req, res) => {
   Report.stats()
     .then(dbRes => {
       res.json(dbRes.rows)
     })
+})
+
+app.post("/api/reports", (req, res) => {
+  let newReport = req.body;
+  console.log(newReport)
+  Report.create(newReport);
+  console.log("new report added!")
+  
+})
+
+app.listen(PORT, () => {
+  console.log(`server listening on port ${PORT}`);
 })
 
 // fundamentals - crucial for reading docs & example code
