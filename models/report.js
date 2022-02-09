@@ -41,7 +41,6 @@ function reports(num) {
 }
 
 
-
 function stats() {
   let sql = `
   select date, time, user_input 
@@ -51,10 +50,17 @@ function stats() {
   return db.query(sql)
 }
 
+function create({email, lat, lng, date, time, user_input}) {
+  let sql = `INSERT INTO reports (user_email, lat, lng, date, time, user_input, authenticated) VALUES ($1, $2, $3, $4, $5, $6, $7);`
+  let values = [email, lat, lng, date, time, user_input, false]
+  db.query(sql, values);
+}
+
 
 const Report = {
   reports,
-  stats
+  stats,
+  create
 }
 
 module.exports = Report
