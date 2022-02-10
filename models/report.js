@@ -8,36 +8,20 @@ function moreProcessing(num) {
 }
 
 // top level function declaration
-function reports(num) {
-
-  
-  // res obj from express is a dependency
-  // if we need to pass it in
-  // this function is couple to express
-  
-
-
-    // multiline sql makes it easier to read
-    // not the most efficient query
-    // but showcasing more what database is capable off
-        
-    
+function reports() {
   let sql = `
     select * 
     from reports;
   `
-    // old style async fn that take callbacks & does not return promises
-    // they're not composable
-    // instead of old style callback
-    // pg library also supports promise interface
-    // we are going to use it
-    // so that whoever is calling Station.random() can decide later
-    // what they want to do with the response from the database
-    
-    
-    // db.query() returns a promise that we're returning to the caller
-    
   return db.query(sql).then(res => res.rows)
+}
+
+function getReportsInBounds(mapBounds) {
+  let sql = `SELECT * FROM reports 
+  WHERE (lat BETWEEN ${mapBounds.botLat} AND ${mapBounds.topLat}) 
+  AND (lng BETWEEN ${mapBounds.botLng} AND ${mapBounds.topLng});`;
+  console.log(sql);
+  return db.query(sql)
 }
 
 
@@ -59,6 +43,7 @@ function create({email, lat, lng, date, time, user_input}) {
 
 const Report = {
   reports,
+  getReportsInBounds,
   stats,
   create
 }

@@ -19,17 +19,23 @@ app.use(express.static('public'))
 app.use(express.json())
 
 app.get('/api/reports', (req, res) => {
-  Report.reports()
-        .then(dbRes => {
-          res.json(dbRes)
-        })
+  const coords = {
+        botLat: req.query.botLat,
+        topLat: req.query.topLat,
+        botLng: req.query.botLng,
+        topLng: req.query.topLng
+      }
+  const result = Report.getReportsInBounds(coords)
+  result.then((dbRes) => {
+    res.json(dbRes.rows);
+  });
 })
 
 app.get('/api/info', (req, res) => {
   res.json({ message: 'welcome to the safehaven json api'})
 })
 
-app.get('/api/stations/stats', (req, res) => {
+app.get('/api/reports/stats', (req, res) => {
   Report.stats()
     .then(dbRes => {
       res.json(dbRes.rows)
