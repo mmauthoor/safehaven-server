@@ -47,6 +47,10 @@ app.post("/api/reports", (req, res) => {
   console.log(newReport)
   Report.create(newReport);
   console.log("new report added!")
+  var redirect = { redirect: "/resources" }
+  if (newReport.email){
+    return res.json(redirect)
+  }
   
 })
 
