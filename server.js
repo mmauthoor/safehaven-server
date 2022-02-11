@@ -9,11 +9,6 @@ const PORT = process.env.PORT || 8000
 const Report = require('./models/report.js');
 const { reports } = require('./models/report.js');
 
-
-
-// using middleware to serve static files
-// mainly for client side js that runs in the browser
-// bascially how project 1 works
 app.use(express.static('public'))
 
 app.use(express.json())
@@ -27,6 +22,7 @@ app.get('/api/reports', (req, res) => {
       }
   const result = Report.getReportsInBounds(coords)
   result.then((dbRes) => {
+    console.log(dbRes.rows)
     res.json(dbRes.rows);
   });
 })
@@ -57,13 +53,3 @@ app.post("/api/reports", (req, res) => {
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
 })
-
-// fundamentals - crucial for reading docs & example code
-// code readability - tell a story - easier even for yourself when reading after 3 weeks
-// following instructions - professional & reliable
-// take small steps towards your goal - wisdom 
-// understand the architecture - big picture stuff 
-// understand the problem - takes time but neccessary
-// mindset - effects your form
-// refactoring - it's not the first step
-// abstractions - if you can do all the above
