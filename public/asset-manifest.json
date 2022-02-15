@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.1c419e2a.css",
-    "main.js": "/static/js/main.d398bd8d.js",
+    "main.js": "/static/js/main.f4b60211.js",
     "static/js/787.7c3e54f9.chunk.js": "/static/js/787.7c3e54f9.chunk.js",
     "static/media/logo.png": "/static/media/logo.d124fa9e861b23f9bdcb.png",
     "static/media/hotlinelogo.png": "/static/media/hotlinelogo.7402a96b1f54dcb59d31.png",
     "index.html": "/index.html",
     "main.1c419e2a.css.map": "/static/css/main.1c419e2a.css.map",
-    "main.d398bd8d.js.map": "/static/js/main.d398bd8d.js.map",
+    "main.f4b60211.js.map": "/static/js/main.f4b60211.js.map",
     "787.7c3e54f9.chunk.js.map": "/static/js/787.7c3e54f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1c419e2a.css",
-    "static/js/main.d398bd8d.js"
+    "static/js/main.f4b60211.js"
   ]
 }
