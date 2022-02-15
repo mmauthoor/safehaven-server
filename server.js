@@ -5,7 +5,7 @@ app.use(cors())
 const db = require("./db")
 
 // using environment variables
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 3001
 const Report = require('./models/report.js');
 const { reports } = require('./models/report.js');
 
@@ -22,7 +22,6 @@ app.get('/api/reports', (req, res) => {
       }
   const result = Report.getReportsInBounds(coords)
   result.then((dbRes) => {
-    console.log(dbRes.rows)
     res.json(dbRes.rows);
   });
 })
@@ -40,7 +39,6 @@ app.get('/api/reports/stats', (req, res) => {
 
 app.post("/api/reports", (req, res) => {
   let newReport = req.body;
-  console.log(newReport)
   Report.create(newReport);
   console.log("new report added!")
   var redirect = { redirect: "/resources" }

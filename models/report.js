@@ -10,8 +10,8 @@ function moreProcessing(num) {
 // top level function declaration
 function reports() {
   let sql = `
-    select * 
-    from reports;
+    SELECT * 
+    FROM reports;
   `
   return db.query(sql).then(res => res.rows)
 }
@@ -27,8 +27,8 @@ function getReportsInBounds(mapBounds) {
 
 function stats() {
   let sql = `
-  select date, time, user_input 
-  from reports;
+  SELECT date, time, user_input 
+  FROM reports;
   `
 
   return db.query(sql)

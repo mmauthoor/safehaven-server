@@ -1,8 +1,19 @@
 const { Pool } = require('pg')
 
-const pool = new Pool({ // this will need to change in deployment, replaced by a heroku string
-  database: 'safehaven'
-})
+let pool;
+if (process.env.NODE_ENV === 'production') {
+  pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  })
+} else {
+  pool = new Pool({
+    database: 'safehaven',
+    password: 'optional_password'
+  })
+}
 
 module.exports = pool
 
